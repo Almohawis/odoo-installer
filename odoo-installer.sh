@@ -1,7 +1,7 @@
 #!/bin/bash
 # Programming By Sulaiman ALmohawis Github : ALmohawis
 echo "
-Odoo Installer By:
+Odoo Setup By:
 _______  _        _______  _______           _______          _________ _______ 
 (  ___  )( ╲      (       )(  ___  )│╲     ╱│(  ___  )│╲     ╱│╲__   __╱(  ____ ╲
 │ (   ) ││ (      │ () () ││ (   ) ││ )   ( ││ (   ) ││ )   ( │   ) (   │ (    ╲╱
@@ -12,6 +12,7 @@ _______  _        _______  _______           _______          _________ _______
 │╱     ╲│(_______╱│╱     ╲│(_______)│╱     ╲││╱     ╲│(_______)╲_______╱╲_______)
                                                                                                                                                                                              
                                                                                                                              "
+
 read -p "admin password: " AP
 apt update
 wait
