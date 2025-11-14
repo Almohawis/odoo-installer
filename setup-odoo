@@ -7,6 +7,26 @@ echo '
                                                                 
 
 By ALmohawis'
+
+
+# Version check
+REQUIRED_VERSION="24.04"
+CURRENT_VERSION=$(lsb_release -rs)
+
+echo "Current Ubuntu version: $CURRENT_VERSION"
+if [[ "$CURRENT_VERSION" != "$REQUIRED_VERSION" ]]; then
+    echo "Warning: This script is intended for Ubuntu $REQUIRED_VERSION.
+Press ENTER Or Any Key to continue at your own risk, or press X to cancel."
+
+    read -rsn1 CHOICE
+    if [[ "$CHOICE" == "X" || "$CHOICE" == "x" ]]; then
+        echo -e "\nAborted by user."
+        exit 1
+    fi
+fi
+
+echo "Continuing with the script..."
+
 echo ' Which Odoo Version Install :
 [1] Odoo 19 [1]
 [2] Odoo 18 [2]
