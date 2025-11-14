@@ -14,7 +14,7 @@ _______  _        _______  _______           _______          _________ _______
                                                                                                                              "
 
 read -p "admin password: " AP
-read -p "Port Number (By Default is 8069 Press Enter) ===>" Port
+read -p "Port Number (By Default is 8069 Press Enter & Port > 1024) ===>" Port
 
 if [ -z "$AP" ]; then
   echo "Password cannot be empty, Please Run setup-odoo Again"
@@ -22,6 +22,15 @@ if [ -z "$AP" ]; then
 fi
 if [ -z "$Port" ]; then
   Port=8069
+fi
+if [ "$Port" -lt 1024 ]; then
+	echo "[xXx] Port < 1024 [xXx]"
+	exit 1
+fi
+#Check STR or NUM
+if ! [[ "$Port" =~ ^[0-9]+$ ]]; then
+    echo "[xXx] Port must be numbers only [xXx]"
+    exit 1
 fi
 
 apt update
@@ -63,7 +72,7 @@ db_user = odoo
 db_password = False
 logfile = /var/log/odoo18/odoo-server.log
 addons_path = /opt/odoo/odoo/addons,/opt/odoo/custom-addons
-xmlrpc_port = 8069" > /etc/odoo.conf
+xmlrpc_port = $Port " > /etc/odoo.conf
 wait
 echo "[Unit]
 Description=Odoo
@@ -98,7 +107,7 @@ echo "
                          
 If the output is \"active\" this means that the Odoo System is installed without any problems
 
-{YourIPorDomain:8069}
+{YourIPorDomain:$Port }
 Master Password Is \"admin Password\" 
 GitHub.com/ALmohawis
 "

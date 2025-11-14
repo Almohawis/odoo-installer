@@ -14,14 +14,10 @@ _______  _        _______  _______           _______          _________ _______
                                                                                                                              "
 
 read -p "admin password: " AP
-read -p "Port Number (By Default is 8069 Press Enter) ===>" Port
 
 if [ -z "$AP" ]; then
   echo "Password cannot be empty, Please Run setup-odoo Again"
   exit 1
-fi
-if [ -z "$Port" ]; then
-  Port=8069
 fi
 
 apt update
