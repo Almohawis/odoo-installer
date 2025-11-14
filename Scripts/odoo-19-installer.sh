@@ -92,7 +92,7 @@ systemctl start odoo
 wait
 systemctl enable odoo
 wait
-systemctl is-active odoo
+systemctl status odoo --no-pager
 echo "
   ____                   
  │  _ ╲  ___  _ __   ___ 
