@@ -88,7 +88,7 @@ systemctl start odoo
 wait
 systemctl enable odoo
 wait
-systemctl status odoo &
+systemctl is-active odoo
 echo "
   ____                   
  │  _ ╲  ___  _ __   ___ 
