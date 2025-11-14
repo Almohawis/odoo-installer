@@ -18,7 +18,8 @@ if [[ "$CURRENT_VERSION" != "$REQUIRED_VERSION" ]]; then
     echo "Warning: This script is intended for Ubuntu $REQUIRED_VERSION.
 Press ENTER Or Any Key to continue at your own risk, or press X to cancel."
 
-    read -rsn1 CHOICE
+    read -n 1 CHOICE
+    echo ""
     if [[ "$CHOICE" == "X" || "$CHOICE" == "x" ]]; then
         echo -e "\nAborted by user."
         exit 1
@@ -31,14 +32,15 @@ echo ' Which Odoo Version Install :
 [1] Odoo 19 [1]
 [2] Odoo 18 [2]
 '
-read -p "====> " V
-
+read -n 1 -p "====> " V
+echo ""
 if [ "$V" = "1" ]; then
     echo 'Version 19?
 [1] Yes [1]
 [2] No [2]
 ' 
-    read -p "====>" S
+    read -n 1 -p "====>" S
+    echo ""
     if [ "$S" == "1" ]; then
         echo "ok"
         chmod +x ./Scripts/odoo-19-installer.sh
@@ -52,7 +54,8 @@ elif [ "$V" = "2" ]; then
 [1] Yes [1]
 [2] No [2]
 '
-    read -p "====> " S
+    read -n 1 -p "====> " S
+    echo ""
     if [ "$S" = "1" ]; then
         echo "ok"
         chmod +x ./Scripts/odoo-18-installer.sh
