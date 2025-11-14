@@ -31,6 +31,7 @@ echo "Continuing with the script..."
 echo ' Which Odoo Version Install :
 [1] Odoo 19 [1]
 [2] Odoo 18 [2]
+[3] Exit [3]
 '
 read -n 1 -p "====> " V
 echo ""
@@ -64,7 +65,12 @@ elif [ "$V" = "2" ]; then
         echo "Cancel"
         exit 1
     fi
+elif [ "$V" = "3" ]; then
+    echo "Exit"
+    exit 0
+
 else
     echo "NotFound / Exit Please Run ./setup-odoo Again"
+
 fi
 
