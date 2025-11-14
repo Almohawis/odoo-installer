@@ -33,19 +33,19 @@ if ! [[ "$Port" =~ ^[0-9]+$ ]]; then
     exit 1
 fi
 
-apt update
+sudo apt update
 wait
-apt full-upgrade -y
+sudo apt full-upgrade -y
 wait
-apt install python3-minimal python3-dev python3-pip python3-venv python3-setuptools build-essential libzip-dev libxslt1-dev libldap2-dev python3-wheel libsasl2-dev node-less libjpeg-dev xfonts-utils libpq-dev libffi-dev fontconfig git wget postgresql nodejs npm xfonts-75dpi xfonts-base wkhtmltopdf -y
+sudo apt install python3-minimal python3-dev python3-pip python3-venv python3-setuptools build-essential libzip-dev libxslt1-dev libldap2-dev python3-wheel libsasl2-dev node-less libjpeg-dev xfonts-utils libpq-dev libffi-dev fontconfig git wget postgresql nodejs npm xfonts-75dpi xfonts-base wkhtmltopdf -y
 wait
-systemctl start postgresql
+sudo systemctl start postgresql
 wait
 sudo -u postgres createuser --superuser odoo
 wait
-npm install -g rtlcss
+sudo npm install -g rtlcss
 wait
-adduser --system --group --home=/opt/odoo --shell=/bin/bash odoo
+sudo adduser --system --group --home=/opt/odoo --shell=/bin/bash odoo
 wait
 sudo -u odoo bash -c "
 cd /opt/odoo
@@ -57,13 +57,13 @@ pip3 install -r odoo/requirements.txt
 deactivate
 "
 wait
-mkdir /opt/odoo/custom-addons
+sudo mkdir /opt/odoo/custom-addons
 wait
-mkdir /var/log/odoo18
+sudo mkdir /var/log/odoo18
 wait
-chown odoo:odoo /var/log/odoo18
+sudo chown odoo:odoo /var/log/odoo18
 wait
-chown odoo:odoo /opt/odoo/custom-addons
+sudo chown odoo:odoo /opt/odoo/custom-addons
 echo "[options]
 admin_passwd = $AP
 db_host = False
@@ -91,13 +91,13 @@ StandardOutput=journal+console
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/odoo.service
 wait
-systemctl daemon-reload
+sudo systemctl daemon-reload
 wait
-systemctl start odoo
+sudo systemctl start odoo
 wait
-systemctl enable odoo
+sudo systemctl enable odoo
 wait
-systemctl status odoo --no-pager
+sudo systemctl status odoo --no-pager
 echo "
   ____                   
  │  _ ╲  ___  _ __   ___ 
