@@ -18,19 +18,13 @@ apt update
 wait
 apt full-upgrade -y
 wait
-apt install python3-minimal python3-dev python3-pip python3-venv python3-setuptools build-essential libzip-dev libxslt1-dev libldap2-dev python3-wheel libsasl2-dev node-less libjpeg-dev xfonts-utils libpq-dev libffi-dev fontconfig git wget postgresql nodejs npm xfonts-75dpi xfonts-base -y
+apt install python3-minimal python3-dev python3-pip python3-venv python3-setuptools build-essential libzip-dev libxslt1-dev libldap2-dev python3-wheel libsasl2-dev node-less libjpeg-dev xfonts-utils libpq-dev libffi-dev fontconfig git wget postgresql nodejs npm xfonts-75dpi xfonts-base wkhtmltopdf -y
 wait
 systemctl start postgresql
 wait
 sudo -u postgres createuser --superuser odoo
 wait
 npm install -g rtlcss
-wait
-wget http://security.ubuntu.com/ubuntu/pool/universe/w/wkhtmltopdf/wkhtmltopdf_0.12.6-2build2_amd64.deb
-wait
-dpkg -i wkhtmltopdf_0.12.6-2build2_amd64.deb
-wait
-apt install -f -y
 wait
 adduser --system --group --home=/opt/odoo --shell=/bin/bash odoo
 wait
@@ -84,7 +78,7 @@ systemctl start odoo
 wait
 systemctl enable odoo
 wait
-systemctl status odoo
+systemctl status odoo &
 echo "
   ____                   
  │  _ ╲  ___  _ __   ___ 

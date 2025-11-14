@@ -18,17 +18,15 @@ apt update
 wait
 apt full-upgrade -y
 wait
-apt install python3.9 python3.9-dev python3-pip python3.9-venv python3-setuptools build-essential libzip-dev libxslt1-dev libldap2-dev python3-wheel libsasl2-dev node-less libjpeg-dev xfonts-utils libpq-dev libffi-dev fontconfig git wget postgresql postgresql-contrib nodejs npm xfonts-75dpi xfonts-base -y
+apt install python3-minimal python3-dev python3-pip python3-venv python3-setuptools build-essential libzip-dev libxslt1-dev libldap2-dev python3-wheel libsasl2-dev node-less libjpeg-dev xfonts-utils libpq-dev libffi-dev fontconfig git wget postgresql nodejs npm xfonts-75dpi xfonts-base wkhtmltopdf -y
 wait
 systemctl start postgresql
+wait
+apt install -f -y
 wait
 sudo -u postgres createuser --superuser odoo
 wait
 npm install -g rtlcss
-wait
-wget http://security.ubuntu.com/ubuntu/pool/universe/w/wkhtmltopdf/wkhtmltopdf_0.12.6-2build2_amd64.deb
-wait
-dpkg -i wkhtmltopdf_0.12.6-2build2_amd64.deb
 wait
 apt install -f -y
 wait
@@ -37,7 +35,7 @@ wait
 sudo -u odoo bash -c "
 cd /opt/odoo
 git clone https://github.com/odoo/odoo --depth 1 --branch 19.0 odoo
-python3.9 -m venv odoo-env
+python3 -m venv odoo-env
 source odoo-env/bin/activate
 pip3 install wheel
 pip3 install -r odoo/requirements.txt
@@ -90,7 +88,7 @@ echo "
  │  _ ╲  ___  _ __   ___ 
  │ │ │ │╱ _ ╲│ '_ ╲ ╱ _ ╲
  │ │_│ │ (_) │ │ │ │  __╱
- │ ____╱ ╲___╱│_│ │_│╲___│
+ │____╱ ╲___╱│_│ │_│╲___│
                          
 If the output is \"active\" this means that the Odoo System is installed without any problems
 
