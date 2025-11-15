@@ -3,12 +3,13 @@ Shell Script to install and setup odoo 18 and odoo 19 With One Press on Ubuntu 2
 
 ## How To Use?
  1. git clone https://github.com/Almohawis/odoo-installer.git
- 2. chmod +x ./setup-odoo
- 3. ./setup-odoo
- 4. Select The Version
- 5. Confirm
- 6. Enter Admin Password
- 7. Select The Port " For odoo 18 "
- 8. Enjoy (:
+ 2. cd odoo-installer
+ 3. chmod +x ./setup-odoo
+ 4. ./setup-odoo
+ 5. Select The Version
+ 6. Confirm
+ 7. Enter Admin Password
+ 8. Select The Port " For odoo 18 "
+ 9. Enjoy (:
 
 
