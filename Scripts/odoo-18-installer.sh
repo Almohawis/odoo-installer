@@ -14,7 +14,7 @@ _______  _        _______  _______           _______          _________ _______
                                                                                                                              "
 
 read -p "admin password: " AP
-read -p "Port Number (By Default is 8069 Press Enter) ===>" Port
+read -p "Port Number (By Default is 8069 Press Enter & Port > 1024) ===>" Port
 
 if [ -z "$AP" ]; then
   echo "Password cannot be empty, Please Run setup-odoo Again"
@@ -23,20 +23,29 @@ fi
 if [ -z "$Port" ]; then
   Port=8069
 fi
+if [ "$Port" -lt 1024 ]; then
+	echo "[xXx] Port < 1024 [xXx]"
+	exit 1
+fi
+#Check STR or NUM
+if ! [[ "$Port" =~ ^[0-9]+$ ]]; then
+    echo "[xXx] Port must be numbers only [xXx]"
+    exit 1
+fi
 
-apt update
+sudo apt update
 wait
-apt full-upgrade -y
+sudo apt full-upgrade -y
 wait
-apt install python3-minimal python3-dev python3-pip python3-venv python3-setuptools build-essential libzip-dev libxslt1-dev libldap2-dev python3-wheel libsasl2-dev node-less libjpeg-dev xfonts-utils libpq-dev libffi-dev fontconfig git wget postgresql nodejs npm xfonts-75dpi xfonts-base wkhtmltopdf -y
+sudo apt install python3-minimal python3-dev python3-pip python3-venv python3-setuptools build-essential libzip-dev libxslt1-dev libldap2-dev python3-wheel libsasl2-dev node-less libjpeg-dev xfonts-utils libpq-dev libffi-dev fontconfig git wget postgresql nodejs npm xfonts-75dpi xfonts-base wkhtmltopdf -y
 wait
-systemctl start postgresql
+sudo systemctl start postgresql
 wait
 sudo -u postgres createuser --superuser odoo
 wait
-npm install -g rtlcss
+sudo npm install -g rtlcss
 wait
-adduser --system --group --home=/opt/odoo --shell=/bin/bash odoo
+sudo adduser --system --group --home=/opt/odoo --shell=/bin/bash odoo
 wait
 sudo -u odoo bash -c "
 cd /opt/odoo
@@ -48,13 +57,13 @@ pip3 install -r odoo/requirements.txt
 deactivate
 "
 wait
-mkdir /opt/odoo/custom-addons
+sudo mkdir /opt/odoo/custom-addons
 wait
-mkdir /var/log/odoo18
+sudo mkdir /var/log/odoo18
 wait
-chown odoo:odoo /var/log/odoo18
+sudo chown odoo:odoo /var/log/odoo18
 wait
-chown odoo:odoo /opt/odoo/custom-addons
+sudo chown odoo:odoo /opt/odoo/custom-addons
 echo "[options]
 admin_passwd = $AP
 db_host = False
@@ -63,7 +72,11 @@ db_user = odoo
 db_password = False
 logfile = /var/log/odoo18/odoo-server.log
 addons_path = /opt/odoo/odoo/addons,/opt/odoo/custom-addons
+<<<<<<< HEAD
 xmlrpc_port = 8069" | sudo tee /etc/odoo.conf
+=======
+xmlrpc_port = $Port " > /etc/odoo.conf
+>>>>>>> master
 wait
 echo "[Unit]
 Description=Odoo
@@ -82,13 +95,13 @@ StandardOutput=journal+console
 [Install]
 WantedBy=multi-user.target" | sudo tee /etc/systemd/system/odoo.service
 wait
-systemctl daemon-reload
+sudo systemctl daemon-reload
 wait
-systemctl start odoo
+sudo systemctl start odoo
 wait
-systemctl enable odoo
+sudo systemctl enable odoo
 wait
-systemctl is-active odoo
+sudo systemctl status odoo --no-pager
 echo "
   ____                   
  │  _ ╲  ___  _ __   ___ 
@@ -98,7 +111,7 @@ echo "
                          
 If the output is \"active\" this means that the Odoo System is installed without any problems
 
-{YourIPorDomain:8069}
+{YourIPorDomain:$Port }
 Master Password Is \"admin Password\" 
 GitHub.com/ALmohawis
 "
