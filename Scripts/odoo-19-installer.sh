@@ -67,7 +67,7 @@ db_user = odoo
 db_password = False
 logfile = /var/log/odoo19/odoo-server.log
 addons_path = /opt/odoo/odoo/addons,/opt/odoo/custom-addons
-xmlrpc_port = 8069" > /etc/odoo.conf
+xmlrpc_port = 8069" | sudo tee /etc/odoo.conf
 wait
 echo "[Unit]
 Description=Odoo
@@ -84,7 +84,7 @@ ExecStart=/opt/odoo/odoo-env/bin/python3 /opt/odoo/odoo/odoo-bin -c /etc/odoo.co
 StandardOutput=journal+console
 
 [Install]
-WantedBy=multi-user.target" > /etc/systemd/system/odoo.service
+WantedBy=multi-user.target" | sudo tee /etc/systemd/system/odoo.service
 wait
 systemctl daemon-reload
 wait
